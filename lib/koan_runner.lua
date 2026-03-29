@@ -5,7 +5,7 @@ KoanRunner.__index = KoanRunner
 
 --- Creates a new KoanRunner that loads and manages the koan curriculum.
 --- @return KoanRunner
-function KoanRunner.new()
+function KoanRunner.new(demo)
     local self = setmetatable({}, KoanRunner)
     self.index = {}
     self.koans = {}
@@ -18,6 +18,7 @@ function KoanRunner.new()
     self.show_solution = false
     self.file_modtime = 0
     self.poll_timer = 0
+    self.demo = demo or false
 
     return self
 end
@@ -64,29 +65,37 @@ function KoanRunner:loadCurrentKoan()
     self.hint_index = 0
     self.show_solution = false
 
-    local source, read_err = ShaderLoader.read(koan.shader_path)
+    local load_path = self.demo and koan.solution_path or koan.shader_path
+
+    local source, read_err = ShaderLoader.read(load_path)
     if not source then
         self.shader_error = read_err
         return
     end
 
-    local blanks = ShaderLoader.detect_blanks(source)
-    if #blanks > 0 then
-        self.shader_error = string.format(
-            "Fill in %d blank(s) marked with ??? in:\n%s",
-            #blanks, koan.shader_path
-        )
-        return
+    if not self.demo then
+        local blanks = ShaderLoader.detect_blanks(source)
+        if #blanks > 0 then
+            self.shader_error = string.format(
+                "Fill in %d blank(s) marked with ??? in:\n%s",
+                #blanks, koan.shader_path
+            )
+            return
+        end
     end
 
-    local shader, compile_err = ShaderLoader.compile(source)
+    -- Strip duplicate extern declarations that the boilerplate already provides
+    local clean_source = source:gsub("%s*extern%s+number%s+time%s*;[^\n]*\n?", "")
+                               :gsub("%s*extern%s+vec2%s+resolution%s*;[^\n]*\n?", "")
+
+    local shader, compile_err = ShaderLoader.compile(clean_source)
     if not shader then
         self.shader_error = compile_err
         return
     end
 
     self.current_shader = shader
-    self.file_modtime = ShaderLoader.get_modtime(koan.shader_path) or 0
+    self.file_modtime = ShaderLoader.get_modtime(load_path) or 0
 end
 
 --- Polls for file changes and hot-reloads the shader.

@@ -11,6 +11,8 @@ function love.load(args)
         if v == "--present" then
             mode = "present"
             koan_arg = args[i + 1]
+        elseif v == "--demo" then
+            mode = "demo"
         end
     end
 
@@ -31,9 +33,9 @@ function love.load(args)
             print("Error loading koan: " .. err)
             love.event.quit(1)
         end
-    elseif mode == "learn" then
+    elseif mode == "learn" or mode == "demo" then
         local KoanRunner = require("lib.koan_runner")
-        runner = KoanRunner.new()
+        runner = KoanRunner.new(mode == "demo")
         local ok, err = runner:loadCurriculum()
         if ok then
             print("Loaded " .. #runner.koans .. " koan(s)")
