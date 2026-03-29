@@ -25,7 +25,7 @@ function Exporter.export(frame_dir, output_name, fps)
         fps, frame_pattern, mp4_path
     )
     local mp4_ok = os.execute(mp4_cmd)
-    if not mp4_ok then
+    if mp4_ok ~= 0 then
         return false, "ffmpeg MP4 export failed"
     end
     print("  MP4: " .. mp4_path)
@@ -38,7 +38,7 @@ function Exporter.export(frame_dir, output_name, fps)
         fps, frame_pattern, fps, palette_path
     )
     local palette_ok = os.execute(palette_cmd)
-    if not palette_ok then
+    if palette_ok ~= 0 then
         return false, "ffmpeg palette generation failed"
     end
 
@@ -47,7 +47,7 @@ function Exporter.export(frame_dir, output_name, fps)
         fps, frame_pattern, palette_path, fps, gif_path
     )
     local gif_ok = os.execute(gif_cmd)
-    if not gif_ok then
+    if gif_ok ~= 0 then
         return false, "ffmpeg GIF export failed"
     end
     print("  GIF: " .. gif_path)
