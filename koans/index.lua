@@ -1,5 +1,7 @@
---- Curriculum index: defines the order koans are presented.
---- Each entry maps a folder name to its chapter and position.
 return {
-    { id = "01_coordinates", chapter = "Coordinates & UV Space", order = 1 },
+    -- Chapter 1: Coordinates & UV Space
+    { id = "01_coordinates",   chapter = "Coordinates & UV Space", order = 1 },
+    { id = "01_coordinates_b", chapter = "Coordinates & UV Space", order = 2 },
+    { id = "01_coordinates_c", chapter = "Coordinates & UV Space", order = 3 },
+    { id = "01_coordinates_d", chapter = "Coordinates & UV Space", order = 4 },
 }
