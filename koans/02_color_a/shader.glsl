@@ -4,7 +4,7 @@
 // using the x-coordinate to blend between them.
 //
 // mix(a, b, t) returns a when t=0, b when t=1.
-// Fill in the ??? to blend from red to blue across the screen.
+// Fill in the blank to blend from red to blue across the screen.
 
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords) {
     vec2 uv = screen_coords / love_ScreenSize.xy;

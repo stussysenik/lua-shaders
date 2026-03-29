@@ -8,7 +8,7 @@
 // c = frequency (how many color cycles)
 // d = phase (shifts each RGB channel)
 //
-// Fill in ??? to implement the cosine palette.
+// Fill in the blank to implement the cosine palette.
 // Try: a=0.5, b=0.5, c=1.0, d=vec3(0.0, 0.33, 0.67)
 
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords) {

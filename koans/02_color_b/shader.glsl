@@ -8,7 +8,7 @@
 //   x > edge1 → 1.0
 //   between → smooth curve
 //
-// Fill in the ??? to create a smooth edge at x = 0.5
+// Fill in the blank to create a smooth edge at x = 0.5
 
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords) {
     vec2 uv = screen_coords / love_ScreenSize.xy;

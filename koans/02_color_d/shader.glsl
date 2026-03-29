@@ -9,7 +9,7 @@
 //   k = fract(h + vec3(0, 2, 1) / 3.0) * 6.0 - 3.0
 //   rgb = val * mix(vec3(1), clamp(abs(k) - 1.0, 0.0, 1.0), sat)
 //
-// Fill in ??? to create a hue wheel using the angle from center.
+// Fill in the blank to create a hue wheel using the angle from center.
 
 vec4 effect(vec4 color, Image tex, vec2 texture_coords, vec2 screen_coords) {
     vec2 uv = screen_coords / love_ScreenSize.xy - 0.5;
