@@ -1,3 +1,8 @@
+--- Koan: The Smooth Knife
+--- Chapter 2: Color Mixing & Palettes
+---
+--- smoothstep() is the single most useful function in shader programming.
+--- It creates perfectly smooth, anti-aliased transitions between regions.
 return {
     title = "The Smooth Knife",
     chapter = "color",
@@ -5,17 +10,28 @@ return {
     difficulty = "beginner",
 
     lesson = [[
-smoothstep(edge0, edge1, x) is the shader swiss army knife.
-It returns 0 when x < edge0, 1 when x > edge1, and a smooth
-S-curve in between. No jagged edges, just butter.
+Builds on: 02a (color mapping with mix).
 
-Use it for: soft borders, smooth transitions, anti-aliasing,
-color ramps, masks — almost everything.]],
+Why: Hard edges look aliased -- jagged, pixelated, ugly. One
+function creates perfectly smooth transitions: smoothstep.
+It's the single most useful function in shader programming.
+
+What you see: a soft-edged boundary between black and white.
+What's really happening: smoothstep(edge0, edge1, x) computes
+a cubic S-curve. Below edge0 -> 0. Above edge1 -> 1. Between ->
+a smooth, anti-aliased ramp. No jagged pixels.
+
+Think of smoothstep as a "soft knife" that cuts space into
+regions with perfectly smooth boundaries. Hard step = jagged.
+Smooth step = butter.
+
+Unlocks: SDF edge rendering (chapter 3), anti-aliased shapes,
+soft masks, glow effects, and smooth color ramps.]],
 
     hints = {
-        "smoothstep(0.4, 0.6, uv.x) creates a soft edge at x=0.5",
-        "Try smoothstep on distance to create a soft circle",
+        "One function: smoothstep(0.4, 0.6, uv.x) = soft edge at x=0.5",
+        "The width between edge0 and edge1 controls blur amount",
     },
 
-    concepts = { "smoothstep", "interpolation", "anti-aliasing", "S-curve" },
+    concepts = { "smoothstep", "anti-aliasing", "S-curve interpolation", "mix (from 02a)" },
 }
