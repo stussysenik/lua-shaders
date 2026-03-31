@@ -1,5 +1,8 @@
 # lua-shaders
 
+![Demo](demo.gif)
+
+
 **Karpathy-style koans for GPU shader programming.**
 
 Learn graphics math from first principles — UV coordinates to raymarching —
